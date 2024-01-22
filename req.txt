@@ -1,0 +1,4 @@
+not store api keys
+have a config file
+ask api keys with setup command
+be fast and efficient
