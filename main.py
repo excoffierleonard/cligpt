@@ -3,24 +3,20 @@ import os
 from pathlib import Path
 from openai import OpenAI
 
-# Determine the path to the .cligpt directory in the user's home folder
 home_dir = Path.home()
 config_dir = home_dir / '.cligpt'
-config_dir.mkdir(exist_ok=True)  # Create the .cligpt directory if it doesn't exist
+config_dir.mkdir(exist_ok=True)
 config_file = config_dir / 'settings.json'
 
-# Load or Initialize Configuration
 def load_config():
     try:
         with open(config_file, 'r') as file:
             config = json.load(file)
     except FileNotFoundError:
-        # Initialize with an empty configuration if file not found
         config = {}
         save_config(config)
     return config
 
-# Save Configuration
 def save_config(config):
     with open(config_file, 'w') as file:
         json.dump(config, file, indent=4)
@@ -32,7 +28,6 @@ def main():
     if not OPENAI_API_KEY:
         raise ValueError("API key not found. Please set the OPENAI_API_KEY environment variable.")
 
-    # Prompt for model if not set in config; use 'gpt-4' as default
     if 'model' not in config or not config['model']:
         user_model = input("Enter the OpenAI model you want to use (press Enter for default 'gpt-4'): ")
         config['model'] = user_model.strip() or 'gpt-4'
