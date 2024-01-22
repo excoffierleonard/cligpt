@@ -32,7 +32,7 @@ def print_help():
     Available commands:
     -help or -h: Display this help message.
     -model or -m: Change the OpenAI model. List of available models: https://platform.openai.com/docs/models
-    -exit: Exit the program.
+    -exit or -e: Exit the program.
 
     Setting API Key:
     Linux: export OPENAI_API_KEY='your-api-key'
@@ -60,13 +60,13 @@ def main():
             print("\nEnter your message (type '-h' or '-help' for help): ")
             user_input = input()
 
+            if user_input.lower() in ['-help', '-h']:
+                print_help()
+                continue
             if user_input.lower() in ['-model', '-m']:
                 update_model(config)
                 continue
-            if user_input.lower() in ['-h', '-help']:
-                print_help()
-                continue
-            if user_input.lower() == '-exit':
+            if user_input.lower() in ['-exit', '-e']:
                 break
 
             stream = client.chat.completions.create(
