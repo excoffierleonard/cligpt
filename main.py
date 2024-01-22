@@ -27,6 +27,21 @@ def update_model(config):
     save_config(config)
     print(f"Model updated to {config['model']}")
 
+def print_help():
+    help_text = """
+    Available commands:
+    -help or -h: Display this help message.
+    -model or -m: Change the OpenAI model. List of available models: https://platform.openai.com/docs/models
+    -exit: Exit the program.
+
+    Setting API Key:
+    Linux: export OPENAI_API_KEY='your-api-key'
+    Windows: set OPENAI_API_KEY=your-api-key
+
+    Note: Replace 'your-api-key' with your actual OpenAI API key.
+    """
+    print(help_text)
+
 def main():
     config = load_config()
     OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
@@ -42,14 +57,16 @@ def main():
 
     try:
         while True:
-            print()
-            user_input = input("Enter your message (or type 'exit' to quit): ")
+            print("\nEnter your message (type '-h' or '-help' for help): ")
+            user_input = input()
 
             if user_input.lower() in ['-model', '-m']:
                 update_model(config)
                 continue
-
-            if user_input.lower() == 'exit':
+            if user_input.lower() in ['-h', '-help']:
+                print_help()
+                continue
+            if user_input.lower() == '-exit':
                 break
 
             stream = client.chat.completions.create(
