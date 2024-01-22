@@ -21,6 +21,12 @@ def save_config(config):
     with open(config_file, 'w') as file:
         json.dump(config, file, indent=4)
 
+def update_model(config):
+    user_model = input("Enter a new OpenAI model (press Enter for default 'gpt-4'): ")
+    config['model'] = user_model.strip() or 'gpt-4'
+    save_config(config)
+    print(f"Model updated to {config['model']}")
+
 def main():
     config = load_config()
     OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
@@ -29,8 +35,7 @@ def main():
         raise ValueError("API key not found. Please set the OPENAI_API_KEY environment variable.")
 
     if 'model' not in config or not config['model']:
-        user_model = input("Enter the OpenAI model you want to use (press Enter for default 'gpt-4'): ")
-        config['model'] = user_model.strip() or 'gpt-4'
+        config['model'] = 'gpt-4'
         save_config(config)
 
     client = OpenAI(api_key=OPENAI_API_KEY)
@@ -39,6 +44,11 @@ def main():
         while True:
             print()
             user_input = input("Enter your message (or type 'exit' to quit): ")
+
+            if user_input.lower() in ['-model', '-m']:
+                update_model(config)
+                continue
+
             if user_input.lower() == 'exit':
                 break
 
