@@ -10,12 +10,11 @@ def load_config():
     try:
         with open(CONFIG_FILE, 'r') as file:
             config = json.load(file)
-            # Set default model if not present
-            config.setdefault('model', 'gpt-4')
-            return config
     except FileNotFoundError:
-        # Default configuration
-        return {'model': 'gpt-4'}
+        # Initialize with an empty configuration if file not found
+        config = {}
+        save_config(config)
+    return config
 
 # Save Configuration
 def save_config(config):
@@ -29,16 +28,18 @@ def main():
     if not OPENAI_API_KEY:
         raise ValueError("API key not found. Please set the OPENAI_API_KEY environment variable.")
 
-    # Prompt for model change if needed
-    change_model = input(f"Current model is '{config['model']}'. Do you want to change it? (yes/no): ").lower()
-    if change_model == 'yes':
-        config['model'] = input("Enter the OpenAI model you want to use: ")
+    # Prompt for model if not set in config; use 'gpt-4' as default
+    if 'model' not in config or not config['model']:
+        user_model = input("Enter the OpenAI model you want to use (press Enter for default 'gpt-4'): ")
+        config['model'] = user_model.strip() or 'gpt-4'
         save_config(config)
 
     client = OpenAI(api_key=OPENAI_API_KEY)
 
     while True:
         try:
+            # Print a newline before showing the input prompt
+            print()
             user_input = input("Enter your message (or type 'exit' to quit): ")
             if user_input.lower() == 'exit':
                 break
@@ -52,6 +53,9 @@ def main():
             for chunk in stream:
                 if chunk.choices[0].delta.content is not None:
                     print(chunk.choices[0].delta.content, end="")
+                    
+            # Print a newline to separate the response from the next prompt
+            print()
 
         except Exception as e:
             print(f"An error occurred: {e}")
