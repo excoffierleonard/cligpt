@@ -1,14 +1,18 @@
 import json
 import os
+from pathlib import Path
 from openai import OpenAI
 
-# Configuration File Path
-CONFIG_FILE = 'settings.json'
+# Determine the path to the .cligpt directory in the user's home folder
+home_dir = Path.home()
+config_dir = home_dir / '.cligpt'
+config_dir.mkdir(exist_ok=True)  # Create the .cligpt directory if it doesn't exist
+config_file = config_dir / 'settings.json'
 
 # Load or Initialize Configuration
 def load_config():
     try:
-        with open(CONFIG_FILE, 'r') as file:
+        with open(config_file, 'r') as file:
             config = json.load(file)
     except FileNotFoundError:
         # Initialize with an empty configuration if file not found
@@ -18,7 +22,7 @@ def load_config():
 
 # Save Configuration
 def save_config(config):
-    with open(CONFIG_FILE, 'w') as file:
+    with open(config_file, 'w') as file:
         json.dump(config, file, indent=4)
 
 def main():
