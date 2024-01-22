@@ -36,9 +36,8 @@ def main():
 
     client = OpenAI(api_key=OPENAI_API_KEY)
 
-    while True:
-        try:
-            # Print a newline before showing the input prompt
+    try:
+        while True:
             print()
             user_input = input("Enter your message (or type 'exit' to quit): ")
             if user_input.lower() == 'exit':
@@ -53,12 +52,12 @@ def main():
             for chunk in stream:
                 if chunk.choices[0].delta.content is not None:
                     print(chunk.choices[0].delta.content, end="")
-                    
-            # Print a newline to separate the response from the next prompt
             print()
 
-        except Exception as e:
-            print(f"An error occurred: {e}")
+    except KeyboardInterrupt:
+        print("\nProgram interrupted by user. Exiting...")
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
     main()
