@@ -1,6 +1,7 @@
 # cliGPT: A Way to Access OpenAI Models from the CLI
-I created cliGPT because I wanted to stop having to launch a browser every time I wanted to send a simple request to ChatGPT.
-The program utilizes the [Streaming](https://platform.openai.com/docs/api-reference/streaming) function of the OpenAI API to automatically send answers in chunks, ensuring that you don't have to wait for long responses to generate all at once.
+#### I created cliGPT because I wanted to stop having to launch a browser every time I wanted to send a simple request to ChatGPT.
+
+#### The program utilizes the [Streaming](https://platform.openai.com/docs/api-reference/streaming) function of the OpenAI API to automatically send answers in chunks, ensuring that you don't have to wait for long responses to generate all at once.
 
 ## How to Install?
 You need an [OpenAI API key](https://platform.openai.com/api-keys) for this program to work.
