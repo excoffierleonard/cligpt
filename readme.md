@@ -18,6 +18,13 @@ You need an [OpenAI API key](https://platform.openai.com/api-keys) for this prog
 4. Run it from the CLI with `./cligpt`.
 5. Optionally add it to PATH for ease of use with `mv cligpt /usr/local/bin/`.
 
+### Build from source:
+1. Run `git clone https://git.jisoonet.com/publicprojects/cligpt.git`.
+2. Run `cd cligpt` to change into the cloned directory.
+3. Run `./main.py` to verify that you have all the dependencies installed.
+4. Run `pyinstaller --onefile main.py` to compile the program.
+5. Follow step **2.** for your respective OS.
+
 ## Features
 
 ### `-help` or `-h`
