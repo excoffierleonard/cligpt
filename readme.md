@@ -7,13 +7,13 @@
 You need an [OpenAI API key](https://platform.openai.com/api-keys) for this program to work.
 
 ### On Windows:
-1. Download the executable from the [release page](https://git.jisoonet.com/publicprojects/cligpt/-/releases).
+1. Download the executable from the [releases page](https://git.jisoonet.com/publicprojects/cligpt/-/releases).
 2. Run `set OPENAI_API_KEY=your_api_key_here` to set up your OpenAI API key as an Environment Variable.
 3. Run `./cligpt` to execute the program.
 4. Optionally add it to PATH for ease of use.
 
 ### On Linux:
-1. Download the executable from the [release page](https://git.jisoonet.com/publicprojects/cligpt/-/releases).
+1. Download the executable from the [releases page](https://git.jisoonet.com/publicprojects/cligpt/-/releases).
 2. Run `chmod +x cligpt` to make it executable.
 3. Run `export OPENAI_API_KEY=your_api_key_here` to set up your OpenAI API key as an Environment Variable.
 4. Run `./cligpt` to execute the program.
